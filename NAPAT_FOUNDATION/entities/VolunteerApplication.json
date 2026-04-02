@@ -1,0 +1,60 @@
+{
+  "name": "VolunteerApplication",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "background": {
+      "type": "string",
+      "description": "Professional background"
+    },
+    "area_of_interest": {
+      "type": "string",
+      "enum": [
+        "research",
+        "art_curation",
+        "technology",
+        "community_outreach",
+        "editorial",
+        "events",
+        "education"
+      ]
+    },
+    "availability": {
+      "type": "string",
+      "enum": [
+        "part_time",
+        "full_time",
+        "project_based"
+      ]
+    },
+    "motivation": {
+      "type": "string"
+    },
+    "portfolio_url": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "contacted",
+        "active",
+        "inactive"
+      ],
+      "default": "pending"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "background",
+    "area_of_interest",
+    "motivation"
+  ]
+}

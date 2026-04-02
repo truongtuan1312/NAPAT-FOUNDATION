@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Library — NAPAT Foundation</title>
+  <link rel="icon" href="napatlogo.png">
+  <style>
+    .page-wrap { background: white; padding-top: 64px; }
+
+    .page-hero { border-bottom: 1px solid var(--stone-100); padding: 96px 0; }
+    .page-eyebrow { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: var(--stone-400); margin-bottom: 16px; }
+    .page-h1 { font-size: clamp(3rem,7vw,5.5rem); font-weight: 600; color: var(--stone-900); letter-spacing: -0.02em; line-height: 0.94; margin-bottom: 24px; }
+    .page-h1 em { font-style: italic; font-weight: 300; color: var(--stone-400); }
+    .page-lead { font-size: 1.1rem; color: var(--stone-500); max-width: 520px; line-height: 1.7; }
+
+    /* Filter */
+    .filter-bar { border-bottom: 1px solid var(--stone-100); }
+    .filter-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap; }
+    .filter-btn { font-size: 13px; font-weight: 500; padding: 16px 20px; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; color: var(--stone-400); transition: color 0.2s, border-color 0.2s; font-family: inherit; }
+    .filter-btn:hover { color: var(--stone-700); }
+    .filter-btn.active { border-color: var(--stone-900); color: var(--stone-900); }
+
+    /* Articles */
+    .library-section { padding: 64px 0; }
+    .articles-list { border-top: 1px solid var(--stone-100); }
+    .article-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--stone-100); text-decoration: none; transition: padding-left 0.3s; }
+    .article-row:hover { padding-left: 8px; }
+    .article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .article-cat { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--stone-400); background: var(--stone-100); padding: 2px 8px; }
+    .article-date { font-size: 11px; color: var(--stone-400); }
+    .article-title { font-size: clamp(1rem,1.5vw,1.2rem); font-weight: 500; color: var(--stone-900); transition: color 0.2s; }
+    .article-row:hover .article-title { color: var(--stone-500); }
+    .article-arrow { font-size: 18px; color: var(--stone-200); flex-shrink: 0; transition: color 0.2s; }
+    .article-row:hover .article-arrow { color: var(--stone-900); }
+
+    /* CTA */
+    .substack-cta { background: var(--stone-50); border-top: 1px solid var(--stone-100); padding: 80px 0; }
+    .substack-inner { max-width: 600px; }
+    .substack-h2 { font-size: clamp(1.5rem,3vw,2.2rem); font-weight: 600; color: var(--stone-900); letter-spacing: -0.02em; margin-bottom: 12px; }
+    .substack-body { font-size: 15px; color: var(--stone-500); line-height: 1.7; margin-bottom: 32px; }
+
+    @media (max-width: 768px) {
+      .filter-inner { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="fade-up">
+        <p class="page-eyebrow">Library</p>
+        <h1 class="page-h1">Explorations &<br><em>Research</em></h1>
+        <p class="page-lead">Essays, research summaries, and conversations at the intersection of neuroscience, art, philosophy, anthropology, and technology.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <button class="filter-btn active" onclick="filterLib('All',this)">All</button>
+      <button class="filter-btn" onclick="filterLib('Neuroscience',this)">Neuroscience</button>
+      <button class="filter-btn" onclick="filterLib('Philosophy',this)">Philosophy</button>
+      <button class="filter-btn" onclick="filterLib('Anthropology',this)">Anthropology</button>
+      <button class="filter-btn" onclick="filterLib('Technology',this)">Technology</button>
+    </div>
+  </div>
+
+  <!-- Articles -->
+  <section class="library-section">
+    <div class="container">
+      <div class="articles-list" id="lib-list"></div>
+    </div>
+  </section>
+
+  <!-- Substack CTA -->
+  <section class="substack-cta">
+    <div class="container">
+      <div class="substack-inner fade-up">
+        <p class="page-eyebrow">More Reading</p>
+        <h2 class="substack-h2">Full archive on Substack</h2>
+        <p class="substack-body">Subscribe to access the complete library of essays, research breakdowns, and podcast transcripts — delivered directly to your inbox.</p>
+        <a href="https://thenapatfoundation.substack.com/" target="_blank" rel="noopener noreferrer" class="btn-primary" style="display:inline-block">Visit Substack →</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const articles = [
+    { title: 'Brain system behind making sense of art', date: 'Jan 28, 2025', category: 'Neuroscience', url: 'https://thenapatfoundation.substack.com/p/brain-system-behind-making-sense' },
+    { title: 'Epistemic pillars in experienced and judged art', date: 'Jan 12, 2025', category: 'Philosophy', url: 'https://thenapatfoundation.substack.com/p/epistemic-pillars-in-experienced' },
+    { title: 'Neural hierarchical structure of art interpretation', date: 'Dec 30, 2024', category: 'Neuroscience', url: 'https://thenapatfoundation.substack.com/p/neural-hierarchical-structure-of' },
+    { title: 'The anthropology of aesthetic experience', date: 'Dec 15, 2024', category: 'Anthropology', url: 'https://thenapatfoundation.substack.com/' },
+    { title: 'Human-centered AI: An interdisciplinary framework', date: 'Nov 28, 2024', category: 'Technology', url: 'https://thenapatfoundation.substack.com/' },
+    { title: 'Consciousness, perception, and the philosophy of mind', date: 'Nov 10, 2024', category: 'Philosophy', url: 'https://thenapatfoundation.substack.com/' },
+  ];
+
+  let activeFilter = 'All';
+
+  function filterLib(cat, btn) {
+    activeFilter = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderArticles();
+  }
+
+  function renderArticles() {
+    const list = document.getElementById('lib-list');
+    const filtered = activeFilter === 'All' ? articles : articles.filter(a => a.category === activeFilter);
+    list.innerHTML = filtered.map((a, i) => `
+      <a class="article-row fade-up visible" href="${a.url}" target="_blank" rel="noopener noreferrer" style="transition-delay:${i*0.07}s">
+        <div>
+          <div class="article-meta">
+            <span class="article-cat">${a.category}</span>
+            <span class="article-date">${a.date}</span>
+          </div>
+          <h3 class="article-title">${a.title}</h3>
+        </div>
+        <span class="article-arrow">↗</span>
+      </a>
+    `).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderArticles();
+    document.querySelectorAll('.fade-up').forEach(el => {
+      new IntersectionObserver(([e]) => { if (e.isIntersecting) el.classList.add('visible'); }, { rootMargin: '-40px' }).observe(el);
+    });
+  });
+</script>
+<script>window.NAPAT_PAGE = 'library';</script>
+<script src="shared.js"></script>
+</body>
+</html>

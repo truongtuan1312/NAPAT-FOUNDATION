@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — NAPAT Foundation</title>
+  <link rel="icon" href="napatlogo.png">
+  <style>
+    .page-wrap { background: white; padding-top: 64px; }
+
+    .page-hero { border-bottom: 1px solid var(--stone-100); padding: 96px 0; }
+    .page-eyebrow { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: var(--stone-400); margin-bottom: 16px; }
+    .page-h1 { font-size: clamp(3rem,7vw,5.5rem); font-weight: 600; color: var(--stone-900); letter-spacing: -0.02em; line-height: 0.94; }
+    .page-h1 span { font-style: italic; font-weight: 300; color: var(--stone-400); }
+
+    .contact-section { padding: 80px 0; }
+    .contact-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 64px; }
+
+    /* Form */
+    .two-input { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-stack { display: flex; flex-direction: column; gap: 20px; }
+    select.field-input { background: white; appearance: none; cursor: pointer; }
+
+    /* Success */
+    .success-box { border: 1px solid var(--stone-100); padding: 64px 40px; text-align: center; }
+    .success-icon { width: 48px; height: 48px; background: var(--stone-900); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .success-icon svg { width: 20px; height: 20px; stroke: white; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .success-h3 { font-size: 1.5rem; font-weight: 600; color: var(--stone-900); margin-bottom: 8px; }
+    .success-p { font-size: 14px; color: var(--stone-500); }
+
+    /* Sidebar */
+    .sidebar-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--stone-400); margin-bottom: 20px; }
+    .social-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 48px; }
+    .social-link { display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: var(--stone-600); padding: 10px 0; border-bottom: 1px solid var(--stone-100); transition: color 0.2s; }
+    .social-link:hover { color: var(--stone-900); }
+    .social-arrow { font-size: 12px; color: var(--stone-300); transition: color 0.2s; }
+    .social-link:hover .social-arrow { color: var(--stone-700); }
+    .welcome-list { display: flex; flex-direction: column; gap: 8px; }
+    .welcome-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--stone-500); }
+    .welcome-dot { width: 4px; height: 4px; background: var(--stone-300); border-radius: 50%; flex-shrink: 0; }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .two-input { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="fade-up">
+        <p class="page-eyebrow">Contact</p>
+        <h1 class="page-h1">Get in<br><span>Touch</span></h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form + Sidebar -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Form -->
+        <div class="fade-up">
+          <div id="contact-form-wrap">
+            <div class="form-stack">
+              <div class="two-input">
+                <div>
+                  <label class="field-label">Full Name *</label>
+                  <input class="field-input" id="cf-name" type="text" required />
+                </div>
+                <div>
+                  <label class="field-label">Email Address *</label>
+                  <input class="field-input" id="cf-email" type="email" required />
+                </div>
+              </div>
+              <div class="two-input">
+                <div>
+                  <label class="field-label">Affiliation</label>
+                  <select class="field-input" id="cf-affiliation">
+                    <option value="">Select role</option>
+                    <option value="researcher">Researcher</option>
+                    <option value="artist">Artist</option>
+                    <option value="engineer">Engineer</option>
+                    <option value="philosopher">Philosopher</option>
+                    <option value="educator">Educator</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="field-label">Subject</label>
+                  <input class="field-input" id="cf-subject" type="text" />
+                </div>
+              </div>
+              <div>
+                <label class="field-label">Message *</label>
+                <textarea class="field-input" id="cf-message" rows="6" placeholder="Tell us about your interest..."></textarea>
+              </div>
+              <button class="btn-primary" onclick="sendMessage()" style="width:100%;padding:16px;display:flex;align-items:center;justify-content:center;gap:8px" id="send-btn">
+                <span>Send Message</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Success -->
+          <div class="success-box" id="contact-success" style="display:none">
+            <div class="success-icon">
+              <svg viewBox="0 0 20 20"><polyline points="3 10 8 15 17 5"/></svg>
+            </div>
+            <h3 class="success-h3">Message Sent</h3>
+            <p class="success-p">Thank you. We'll be in touch soon.</p>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="fade-up" style="transition-delay:0.15s">
+          <p class="sidebar-label">Connect</p>
+          <div class="social-list">
+            <a class="social-link" href="https://www.instagram.com/napatfoundation/" target="_blank" rel="noopener noreferrer">Instagram <span class="social-arrow">↗</span></a>
+            <a class="social-link" href="https://x.com/napatfoundation" target="_blank" rel="noopener noreferrer">X / Twitter <span class="social-arrow">↗</span></a>
+            <a class="social-link" href="https://thenapatfoundation.substack.com/" target="_blank" rel="noopener noreferrer">Substack <span class="social-arrow">↗</span></a>
+            <a class="social-link" href="https://www.neuroartsresourcecenter.com/profile/napat-foundation-b4c31" target="_blank" rel="noopener noreferrer">NRC Profile <span class="social-arrow">↗</span></a>
+          </div>
+
+          <p class="sidebar-label">We welcome</p>
+          <div class="welcome-list">
+            <div class="welcome-item"><span class="welcome-dot"></span>Researchers & scientists</div>
+            <div class="welcome-item"><span class="welcome-dot"></span>Artists & creatives</div>
+            <div class="welcome-item"><span class="welcome-dot"></span>Philosophers & ethicists</div>
+            <div class="welcome-item"><span class="welcome-dot"></span>Engineers & developers</div>
+            <div class="welcome-item"><span class="welcome-dot"></span>Educators & activists</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  function sendMessage() {
+    const name = document.getElementById('cf-name').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const message = document.getElementById('cf-message').value.trim();
+    if (!name || !email || !message) { alert('Please fill in all required fields.'); return; }
+    const btn = document.getElementById('send-btn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('contact-form-wrap').style.display = 'none';
+      document.getElementById('contact-success').style.display = 'block';
+    }, 800);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      new IntersectionObserver(([e]) => { if (e.isIntersecting) el.classList.add('visible'); }, { rootMargin: '-40px' }).observe(el);
+    });
+  });
+</script>
+<script>window.NAPAT_PAGE = 'contact';</script>
+<script src="shared.js"></script>
+</body>
+</html>
