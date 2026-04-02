@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — NAPAT Foundation</title>
+  <link rel="icon" href="napatlogo.png">
+  <style>
+    .page-wrap { background: white; padding-top: 64px; }
+
+    .page-hero { border-bottom: 1px solid var(--stone-100); padding: 96px 0; }
+    .page-eyebrow { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: var(--stone-400); margin-bottom: 16px; }
+    .page-h1 { font-size: clamp(3rem,7vw,5.5rem); font-weight: 600; color: var(--stone-900); letter-spacing: -0.02em; line-height: 0.94; margin-bottom: 24px; max-width: 600px; }
+    .page-h1 em { font-style: italic; font-weight: 300; color: var(--stone-400); }
+    .page-lead { font-size: 1.1rem; color: var(--stone-500); max-width: 560px; line-height: 1.7; }
+
+    /* Tab switcher */
+    .tab-bar { border-bottom: 1px solid var(--stone-100); }
+    .tab-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; display: flex; }
+    .tab-btn { font-size: 13px; font-weight: 500; padding: 16px 32px; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; color: var(--stone-400); transition: color 0.2s, border-color 0.2s; font-family: inherit; }
+    .tab-btn:hover { color: var(--stone-700); }
+    .tab-btn.active { border-color: var(--stone-900); color: var(--stone-900); }
+
+    /* Content panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .form-section { background: var(--stone-50); padding: 80px 0; }
+    .form-inner { max-width: 640px; }
+    .form-lead { font-size: 14px; color: var(--stone-500); line-height: 1.7; margin-bottom: 32px; }
+    .form-stack { display: flex; flex-direction: column; gap: 20px; }
+    .two-input { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    select.field-input { background: white; appearance: none; cursor: pointer; }
+    .terms-row { display: flex; align-items: flex-start; gap: 12px; }
+    .terms-row input { margin-top: 2px; width: 16px; height: 16px; accent-color: var(--stone-900); flex-shrink: 0; }
+    .terms-row label { font-size: 14px; color: var(--stone-500); line-height: 1.6; cursor: pointer; }
+    .terms-row a { text-decoration: underline; color: var(--stone-900); }
+
+    /* Done state */
+    .done-state { text-align: center; padding: 80px 0; }
+    .done-h2 { font-size: 2rem; font-weight: 600; color: var(--stone-900); margin-bottom: 12px; }
+    .done-p { font-size: 15px; color: var(--stone-500); max-width: 360px; margin: 0 auto; line-height: 1.7; }
+
+    /* Donate amounts */
+    .amount-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+    .amount-btn { padding: 16px; font-size: 1rem; font-weight: 600; border: 1px solid var(--stone-200); background: white; color: var(--stone-700); cursor: pointer; transition: all 0.2s; font-family: inherit; }
+    .amount-btn:hover { border-color: var(--stone-900); }
+    .amount-btn.selected { background: var(--stone-900); color: white; border-color: var(--stone-900); }
+    .donate-note { font-size: 12px; color: var(--stone-400); text-align: center; margin-top: 8px; }
+
+    /* FAQ */
+    .faq-section { padding: 80px 0; border-top: 1px solid var(--stone-100); }
+    .faq-inner { max-width: 640px; }
+    .faq-h2 { font-size: 1.5rem; font-weight: 600; color: var(--stone-900); margin-bottom: 32px; }
+    .faq-list { border-top: 1px solid var(--stone-100); }
+    .faq-item { border-bottom: 1px solid var(--stone-100); }
+    .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 20px 0; background: none; border: none; cursor: pointer; text-align: left; gap: 16px; font-family: inherit; }
+    .faq-q { font-size: 14px; font-weight: 500; color: var(--stone-900); }
+    .faq-icon { font-size: 18px; color: var(--stone-400); flex-shrink: 0; transition: transform 0.2s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { font-size: 14px; color: var(--stone-500); line-height: 1.75; padding-bottom: 20px; display: none; }
+    .faq-item.open .faq-a { display: block; }
+
+    @media (max-width: 768px) {
+      .tab-inner { padding: 0 24px; }
+      .two-input { grid-template-columns: 1fr; }
+      .amount-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="fade-up">
+        <p class="page-eyebrow">Support</p>
+        <h1 class="page-h1">Fund &<br><em>Donate</em></h1>
+        <p class="page-lead">Apply for a community grant or make a direct contribution to support NAPAT's programs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tab Bar -->
+  <div class="tab-bar">
+    <div class="tab-inner">
+      <button class="tab-btn active" onclick="switchTab('fund',this)">Apply for a Grant</button>
+      <button class="tab-btn" onclick="switchTab('donate',this)">Make a Donation</button>
+    </div>
+  </div>
+
+  <!-- Fund Panel -->
+  <div class="tab-panel active" id="tab-fund">
+    <section class="form-section">
+      <div class="container">
+        <div class="form-inner">
+          <div id="fund-form-wrap">
+            <p class="form-lead">Submit your initial inquiry below. If your project is a strong fit, we will contact you to request a full proposal.</p>
+            <div class="form-stack">
+              <div class="two-input">
+                <div>
+                  <label class="field-label">Full Name *</label>
+                  <input class="field-input" id="f-name" required />
+                </div>
+                <div>
+                  <label class="field-label">Email *</label>
+                  <input class="field-input" id="f-email" type="email" required />
+                </div>
+              </div>
+              <div class="two-input">
+                <div>
+                  <label class="field-label">Organization</label>
+                  <input class="field-input" id="f-org" placeholder="Optional" />
+                </div>
+                <div>
+                  <label class="field-label">Category *</label>
+                  <select class="field-input" id="f-category">
+                    <option value="">Select</option>
+                    <option value="community_service">Community Service</option>
+                    <option value="research_development">Research & Development</option>
+                    <option value="artistic_therapy">Artistic Therapy</option>
+                    <option value="education_technology">Education Technology</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="field-label">Project Title *</label>
+                <input class="field-input" id="f-title" required />
+              </div>
+              <div>
+                <label class="field-label">NAPAT Mission Alignment *</label>
+                <textarea class="field-input" id="f-alignment" rows="4" placeholder="How does your project align with NAPAT's interdisciplinary mission?"></textarea>
+              </div>
+              <div class="terms-row">
+                <input type="checkbox" id="f-terms" />
+                <label for="f-terms">I agree to the <a href="#">Terms & Conditions</a> and confirm all information is accurate.</label>
+              </div>
+              <button class="btn-primary" onclick="submitFund()" id="fund-submit-btn" style="width:100%;padding:16px">Submit Inquiry →</button>
+            </div>
+          </div>
+          <div class="done-state" id="fund-done" style="display:none">
+            <h2 class="done-h2">Application Sent</h2>
+            <p class="done-p">We've received your inquiry and sent confirmation. Expect a reply within 4–6 weeks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Donate Panel -->
+  <div class="tab-panel" id="tab-donate">
+    <section class="form-section">
+      <div class="container">
+        <div class="form-inner">
+          <div id="donate-form-wrap">
+            <p class="form-lead">Every contribution supports NAPAT's research, community programs, and interdisciplinary initiatives.</p>
+            <div class="form-stack">
+              <div>
+                <label class="field-label">Choose an amount (USD)</label>
+                <div class="amount-grid" id="amount-grid">
+                  <button class="amount-btn" onclick="selectAmount(25, this)">$25</button>
+                  <button class="amount-btn" onclick="selectAmount(50, this)">$50</button>
+                  <button class="amount-btn" onclick="selectAmount(100, this)">$100</button>
+                  <button class="amount-btn" onclick="selectAmount(250, this)">$250</button>
+                </div>
+                <input class="field-input" id="custom-amount" type="number" min="1" placeholder="Or enter custom amount" style="margin-top:12px" oninput="onCustomAmount(this)" />
+              </div>
+              <div>
+                <label class="field-label">Email <span style="font-size:11px;color:var(--stone-300);text-transform:none;letter-spacing:normal;font-weight:400">(for confirmation)</span></label>
+                <input class="field-input" id="d-email" type="email" placeholder="your@email.com" />
+              </div>
+              <button class="btn-primary" onclick="submitDonate()" id="donate-btn" style="width:100%;padding:16px" disabled>Select an amount to continue</button>
+              <p class="donate-note">Our team will reach out with secure payment instructions within 24 hours.</p>
+            </div>
+          </div>
+          <div class="done-state" id="donate-done" style="display:none">
+            <h2 class="done-h2">Thank You</h2>
+            <p class="done-p">We've received your donation intent. Our team will reach out with payment details shortly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-inner fade-up">
+        <h2 class="faq-h2">Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-toggle" onclick="toggleFaq(this)">
+              <span class="faq-q">Who can apply?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <p class="faq-a">Artists, researchers, educators and community groups whose work aligns with NAPAT's interdisciplinary mission. Open globally.</p>
+          </div>
+          <div class="faq-item">
+            <button class="faq-toggle" onclick="toggleFaq(this)">
+              <span class="faq-q">How does the process work?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <p class="faq-a">Submit this short form. Our team will email you to request a full proposal if your project is a strong fit.</p>
+          </div>
+          <div class="faq-item">
+            <button class="faq-toggle" onclick="toggleFaq(this)">
+              <span class="faq-q">How long does review take?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <p class="faq-a">Expect a response within 4–6 weeks on a rolling basis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  let selectedAmount = null;
+
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  }
+
+  function selectAmount(val, btn) {
+    selectedAmount = val;
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('custom-amount').value = '';
+    updateDonateBtn();
+  }
+
+  function onCustomAmount(input) {
+    selectedAmount = input.value ? parseFloat(input.value) : null;
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    updateDonateBtn();
+  }
+
+  function updateDonateBtn() {
+    const btn = document.getElementById('donate-btn');
+    if (selectedAmount && selectedAmount > 0) {
+      btn.disabled = false;
+      btn.textContent = `Donate $${selectedAmount} →`;
+    } else {
+      btn.disabled = true;
+      btn.textContent = 'Select an amount to continue';
+    }
+  }
+
+  function submitFund() {
+    const name = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const cat = document.getElementById('f-category').value;
+    const title = document.getElementById('f-title').value.trim();
+    const align = document.getElementById('f-alignment').value.trim();
+    const terms = document.getElementById('f-terms').checked;
+    if (!name || !email || !cat || !title || !align || !terms) { alert('Please fill in all required fields and agree to the terms.'); return; }
+    const btn = document.getElementById('fund-submit-btn');
+    btn.textContent = 'Sending...'; btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('fund-form-wrap').style.display = 'none';
+      document.getElementById('fund-done').style.display = 'block';
+    }, 800);
+  }
+
+  function submitDonate() {
+    if (!selectedAmount) return;
+    const btn = document.getElementById('donate-btn');
+    btn.textContent = 'Processing...'; btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('donate-form-wrap').style.display = 'none';
+      document.getElementById('donate-done').style.display = 'block';
+    }, 800);
+  }
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    item.classList.toggle('open');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      new IntersectionObserver(([e]) => { if (e.isIntersecting) el.classList.add('visible'); }, { rootMargin: '-40px' }).observe(el);
+    });
+  });
+</script>
+<script>window.NAPAT_PAGE = 'support';</script>
+<script src="shared.js"></script>
+</body>
+</html>

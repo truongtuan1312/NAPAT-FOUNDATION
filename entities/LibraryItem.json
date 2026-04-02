@@ -1,0 +1,45 @@
+{
+  "name": "LibraryItem",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the article or podcast episode"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "article",
+        "podcast"
+      ],
+      "default": "article"
+    },
+    "category": {
+      "type": "string",
+      "description": "Category label (e.g. Neuroscience, Philosophy) \u2014 used for articles"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Subtitle or guest description \u2014 used for podcasts"
+    },
+    "date": {
+      "type": "string",
+      "description": "Display date (e.g. Jan 28, 2026)"
+    },
+    "url": {
+      "type": "string",
+      "description": "Full URL to the Substack post"
+    },
+    "published": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to show this item publicly"
+    }
+  },
+  "required": [
+    "title",
+    "type",
+    "url",
+    "date"
+  ]
+}

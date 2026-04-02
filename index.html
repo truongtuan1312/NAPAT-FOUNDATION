@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAPAT Foundation</title>
+  <link rel="icon" href="napatlogo.png">
+  <style>
+    @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeUp  { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 96px 40px 64px; max-width: 1280px; margin: 0 auto; overflow: hidden;
+    }
+    .hero-gradient {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 60%, rgba(214,211,209,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.25em; color: var(--stone-400); margin-bottom: 40px;
+      animation: fadeIn 0.5s 0.2s both;
+    }
+    .hero-h1 {
+      font-size: clamp(3.2rem, 9vw, 8.5rem); font-weight: 600;
+      line-height: 0.92; letter-spacing: -0.02em;
+      color: var(--stone-900); margin-bottom: 32px; max-width: 900px;
+      animation: fadeUp 0.85s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .hero-h1 em { font-style: italic; font-weight: 300; color: var(--stone-400); }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--stone-500);
+      max-width: 480px; line-height: 1.7; margin-bottom: 48px;
+      animation: fadeUp 0.7s 0.5s both;
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; animation: fadeUp 0.6s 0.65s both; }
+    .btn-ghost { font-size: 14px; font-weight: 500; color: var(--stone-400); padding: 14px 8px; transition: color 0.2s; }
+    .btn-ghost:hover { color: var(--stone-900); }
+
+    /* ── Our Work ── */
+    .our-work { border-top: 1px solid var(--stone-100); padding: 96px 0; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .section-h2 { font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 600; color: var(--stone-900); letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 24px; }
+    .section-h2 em { font-style: italic; font-weight: 300; color: var(--stone-400); }
+    .section-body { font-size: 14px; color: var(--stone-500); line-height: 1.75; margin-bottom: 24px; }
+    .pillars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--stone-100); border: 1px solid var(--stone-100); }
+    .pillar-card { background: white; padding: 24px; }
+    .pillar-num { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--stone-300); margin-bottom: 8px; }
+    .pillar-name { font-size: 14px; font-weight: 600; color: var(--stone-900); margin-bottom: 6px; }
+    .pillar-desc { font-size: 12px; color: var(--stone-400); line-height: 1.6; }
+
+    /* ── Stat bar ── */
+    .stat-bar { background: var(--stone-900); color: white; padding: 56px 0; }
+    .stat-grid { max-width: 1280px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; text-align: center; }
+    .stat-number { font-size: clamp(2.5rem,4vw,3.5rem); font-weight: 600; color: #f5f4f3; margin-bottom: 8px; }
+    .stat-label { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--stone-600); }
+
+    /* ── Publications ── */
+    .publications { padding: 96px 0; border-top: 1px solid var(--stone-100); }
+    .pub-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 56px; }
+    .pub-h2 { font-size: clamp(2rem,4vw,3rem); font-weight: 600; color: var(--stone-900); letter-spacing: -0.02em; }
+    .pub-link { font-size: 14px; color: var(--stone-400); transition: color 0.2s; }
+    .pub-link:hover { color: var(--stone-900); }
+    .articles-list { border-top: 1px solid var(--stone-100); }
+    .article-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--stone-100); transition: padding-left 0.3s; }
+    .article-row:hover { padding-left: 8px; }
+    .article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .article-cat { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--stone-400); background: var(--stone-100); padding: 2px 8px; }
+    .article-date { font-size: 11px; color: var(--stone-400); }
+    .article-title { font-size: clamp(1rem,1.5vw,1.2rem); font-weight: 500; color: var(--stone-900); transition: color 0.2s; }
+    .article-row:hover .article-title { color: var(--stone-500); }
+    .article-arrow { font-size: 18px; color: var(--stone-200); flex-shrink: 0; transition: color 0.2s; }
+    .article-row:hover .article-arrow { color: var(--stone-900); }
+
+    /* ── Community ── */
+    .community-section { background: var(--stone-50); border-top: 1px solid var(--stone-100); padding: 96px 0; }
+    .comm-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--stone-200); }
+    .comm-card { background: white; padding: 40px; display: flex; flex-direction: column; }
+    .comm-card h3 { font-size: 1.2rem; font-weight: 600; color: var(--stone-900); margin-bottom: 12px; }
+    .comm-card p { font-size: 14px; color: var(--stone-500); line-height: 1.75; flex: 1; margin-bottom: 32px; }
+
+    /* ── Subscribe ── */
+    .subscribe-section { padding: 128px 0; border-top: 1px solid var(--stone-100); }
+    .subscribe-inner { max-width: 720px; }
+    .subscribe-h2 { font-size: clamp(2rem,4vw,3rem); font-weight: 600; color: var(--stone-900); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px; }
+    .subscribe-sub { font-size: 1.1rem; color: var(--stone-500); margin-bottom: 40px; max-width: 420px; line-height: 1.6; }
+    .email-row { display: flex; max-width: 480px; }
+    .email-input { flex: 1; border: 1px solid var(--stone-200); border-right: none; padding: 12px 16px; font-size: 14px; font-family: inherit; color: var(--stone-900); outline: none; background: white; transition: border-color 0.2s; }
+    .email-input:focus { border-color: var(--stone-900); }
+    .email-input::placeholder { color: var(--stone-400); }
+    .email-btn { background: var(--stone-900); color: white; font-size: 14px; font-weight: 600; font-family: inherit; padding: 12px 20px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; flex-shrink: 0; transition: background 0.2s; }
+    .email-btn:hover { background: var(--stone-700); }
+    .involvement-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--stone-400); margin-bottom: 12px; margin-top: 24px; }
+    .checkboxes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-width: 480px; }
+    .checkbox-label { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+    .checkbox-label input { margin-top: 2px; width: 14px; height: 14px; accent-color: var(--stone-900); flex-shrink: 0; }
+    .checkbox-label span { font-size: 12px; color: var(--stone-500); line-height: 1.5; transition: color 0.2s; }
+    .checkbox-label:hover span { color: var(--stone-900); }
+    .subscribe-note { margin-top: 16px; font-size: 12px; color: var(--stone-400); }
+    .subscribe-note a { text-decoration: underline; transition: color 0.2s; }
+    .subscribe-note a:hover { color: var(--stone-700); }
+    .subscribe-thanks { display: none; align-items: center; gap: 12px; font-size: 14px; font-weight: 500; color: var(--stone-700); padding: 12px 0; }
+    .subscribe-thanks.show { display: flex; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 96px 24px 64px; }
+      .two-col { grid-template-columns: 1fr; gap: 40px; }
+      .stat-grid { grid-template-columns: 1fr 1fr; padding: 0 24px; }
+      .pub-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .pub-link { display: none; }
+      .comm-cards { grid-template-columns: 1fr; }
+      .checkboxes { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section>
+  <div class="hero">
+    <div class="hero-gradient"></div>
+    <p class="hero-label">Neuroscience · Art · Philosophy · Anthropology · Technology</p>
+    <h1 class="hero-h1">Where the mind<br><em>meets meaning</em></h1>
+    <p class="hero-sub">An interdisciplinary collective exploring the intersection of neuroscience, art, philosophy, anthropology, and technology.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="document.getElementById('subscribe-section').scrollIntoView({behavior:'smooth'})">Join the Conversation →</button>
+      <a href="about.html" class="btn-ghost">About NAPAT →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── OUR WORK ── -->
+<section class="our-work">
+  <div class="container">
+    <div class="two-col">
+      <div class="fade-up">
+        <p class="section-label">Our Work</p>
+        <h2 class="section-h2">Research, technology, art —<br><em>grounded in evidence</em></h2>
+        <p class="section-body">NAPAT funds and produces work across four areas: community service, research & development, artistic therapy, and education technology. Each project is held to the same standard — human-centered, ethically sound, and grounded in interdisciplinary evidence.</p>
+        <a href="about.html" class="btn-outline">About the Foundation →</a>
+      </div>
+      <div class="fade-up" style="transition-delay:0.1s">
+        <div class="pillars-grid">
+          <div class="pillar-card"><p class="pillar-num">01</p><p class="pillar-name">Community Service</p><p class="pillar-desc">Building resilience and access to interdisciplinary knowledge.</p></div>
+          <div class="pillar-card"><p class="pillar-num">02</p><p class="pillar-name">Research & Development</p><p class="pillar-desc">Academic and applied research across the NAPAT disciplines.</p></div>
+          <div class="pillar-card"><p class="pillar-num">03</p><p class="pillar-name">Artistic Therapy</p><p class="pillar-desc">Art as a therapeutic tool rooted in neuroscience.</p></div>
+          <div class="pillar-card"><p class="pillar-num">04</p><p class="pillar-name">Education Technology</p><p class="pillar-desc">Ethical, human-centered learning tools for diverse contexts.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STAT BAR ── -->
+<section class="stat-bar">
+  <div class="stat-grid">
+    <div class="fade-up"><p class="stat-number">5</p><p class="stat-label">Core Disciplines</p></div>
+    <div class="fade-up" style="transition-delay:0.08s"><p class="stat-number">4</p><p class="stat-label">Grant Categories</p></div>
+    <div class="fade-up" style="transition-delay:0.16s"><p class="stat-number">7</p><p class="stat-label">Volunteer Roles</p></div>
+    <div class="fade-up" style="transition-delay:0.24s"><p class="stat-number">∞</p><p class="stat-label">Questions Worth Asking</p></div>
+  </div>
+</section>
+
+<!-- ── PUBLICATIONS ── -->
+<section class="publications">
+  <div class="container">
+    <div class="pub-header">
+      <div class="fade-up">
+        <p class="section-label">Publications</p>
+        <h2 class="pub-h2">Latest Explorations</h2>
+      </div>
+      <a href="library.html" class="pub-link">View Library →</a>
+    </div>
+    <div class="articles-list">
+      <a class="article-row fade-up" href="https://thenapatfoundation.substack.com/p/brain-system-behind-making-sense" target="_blank" rel="noopener noreferrer">
+        <div><div class="article-meta"><span class="article-cat">Neuroscience</span><span class="article-date">Jan 28</span></div><h3 class="article-title">Brain system behind making sense of art</h3></div>
+        <span class="article-arrow">↗</span>
+      </a>
+      <a class="article-row fade-up" href="https://thenapatfoundation.substack.com/p/epistemic-pillars-in-experienced" target="_blank" rel="noopener noreferrer" style="transition-delay:0.1s">
+        <div><div class="article-meta"><span class="article-cat">Philosophy</span><span class="article-date">Jan 12</span></div><h3 class="article-title">Epistemic pillars in experienced and judged art</h3></div>
+        <span class="article-arrow">↗</span>
+      </a>
+      <a class="article-row fade-up" href="https://thenapatfoundation.substack.com/p/neural-hierarchical-structure-of" target="_blank" rel="noopener noreferrer" style="transition-delay:0.2s">
+        <div><div class="article-meta"><span class="article-cat">Neuroscience</span><span class="article-date">Dec 30</span></div><h3 class="article-title">Neural hierarchical structure of art interpretation</h3></div>
+        <span class="article-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── GET INVOLVED ── -->
+<section class="community-section">
+  <div class="container">
+    <div class="fade-up" style="margin-bottom:56px">
+      <p class="section-label">Community</p>
+      <h2 class="pub-h2">Get Involved</h2>
+    </div>
+    <div class="comm-cards">
+      <div class="comm-card fade-up">
+        <h3>Community Board</h3>
+        <p>Subscribers-only space to share articles, ask questions, and collaborate. Post your research, events, and ideas.</p>
+        <a href="community.html" class="btn-outline" style="align-self:flex-start">Open Board →</a>
+      </div>
+      <div class="comm-card fade-up" style="transition-delay:0.1s">
+        <h3>Volunteer</h3>
+        <p>Join as researcher, curator, engineer, educator, or community builder. Applications sent directly to our team.</p>
+        <a href="community.html" class="btn-outline" style="align-self:flex-start">Join the Team →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SUBSCRIBE ── -->
+<section class="subscribe-section" id="subscribe-section">
+  <div class="container">
+    <div class="subscribe-inner fade-up">
+      <p class="section-label">Newsletter</p>
+      <h2 class="subscribe-h2">Stay in the conversation</h2>
+      <p class="subscribe-sub">Research updates, essays, and community news — delivered to your inbox.</p>
+      <div class="subscribe-thanks" id="sub-thanks">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 8 6 12 14 4"></polyline></svg>
+        Thank you — we'll be in touch.
+      </div>
+      <div id="sub-form">
+        <div class="email-row">
+          <input type="email" class="email-input" id="email-input" placeholder="your@email.com" />
+          <button class="email-btn" onclick="handleSubscribe()">
+            <span>Subscribe</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8 3 12 7 8 11"/></svg>
+          </button>
+        </div>
+        <p class="involvement-label">I'm interested in (select all that apply)</p>
+        <div class="checkboxes">
+          <label class="checkbox-label"><input type="checkbox"><span>Register for membership</span></label>
+          <label class="checkbox-label"><input type="checkbox"><span>Attending in-person events</span></label>
+          <label class="checkbox-label"><input type="checkbox"><span>Contribute via article submission</span></label>
+          <label class="checkbox-label"><input type="checkbox"><span>Explore partnership opportunities</span></label>
+          <label class="checkbox-label"><input type="checkbox"><span>Provide financial sponsorship</span></label>
+          <label class="checkbox-label"><input type="checkbox"><span>Participating in online discussions</span></label>
+          <label class="checkbox-label"><input type="checkbox"><span>Reading written materials</span></label>
+          <label class="checkbox-label"><input type="checkbox"><span>Receive newsletters</span></label>
+          <label class="checkbox-label"><input type="checkbox"><span>Other media</span></label>
+        </div>
+      </div>
+      <p class="subscribe-note">Full access on Substack → <a href="https://thenapatfoundation.substack.com/" target="_blank" rel="noopener noreferrer">thenapatfoundation.substack.com</a></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  function handleSubscribe() {
+    const email = document.getElementById('email-input').value;
+    if (!email || !email.includes('@')) return;
+    document.getElementById('sub-form').style.display = 'none';
+    document.getElementById('sub-thanks').classList.add('show');
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('email-input').addEventListener('keydown', e => { if (e.key === 'Enter') handleSubscribe(); });
+    document.querySelectorAll('.fade-up').forEach(el => {
+      new IntersectionObserver(([entry]) => { if (entry.isIntersecting) el.classList.add('visible'); }, { rootMargin: '-40px' }).observe(el);
+    });
+  });
+</script>
+<script>window.NAPAT_PAGE = 'home';</script>
+<script src="shared.js"></script>
+</body>
+</html>

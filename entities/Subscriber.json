@@ -1,0 +1,25 @@
+{
+  "name": "Subscriber",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Subscriber email address"
+    },
+    "source": {
+      "type": "string",
+      "description": "Where the subscriber signed up from"
+    },
+    "involvement": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "How the subscriber would like to be involved"
+    }
+  },
+  "required": [
+    "email"
+  ]
+}
